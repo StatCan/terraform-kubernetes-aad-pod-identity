@@ -57,6 +57,7 @@ resource "kubernetes_role_binding" "tiller-aad-pod-identity" {
   subject {
     kind = "ServiceAccount"
     name = "${var.helm_service_account}"
+    namespace = "${var.helm_namespace}"
   }
 }
 
