@@ -22,7 +22,7 @@ resource "null_resource" "wait-dependencies" {
 }
 
 # Namespace admin role
-resource "kubernetes_role" "namespace-admin" {
+resource "kubernetes_role" "tiller-aad-pod-identity" {
   metadata {
     name = "tiller-aad-pod-identity"
     namespace = "${var.helm_namespace}"
@@ -41,7 +41,7 @@ resource "kubernetes_role" "namespace-admin" {
 }
 
 # Namespace admin role bindings
-resource "kubernetes_role_binding" "namespace-admins" {
+resource "kubernetes_role_binding" "tiller-aad-pod-identity" {
   metadata {
     name = "tiller-aad-pod-identity"
     namespace = "${var.helm_namespace}"
@@ -61,7 +61,7 @@ resource "kubernetes_role_binding" "namespace-admins" {
 }
 
 resource "helm_release" "aad-pod-identity" {
-  depends_on = ["null_resource.wait-dependencies", "null_resource.dependency_getter"]
+  depends_on = ["null_resource.wait-dependencies", "null_resource.dependency_getter", "kubernetes_role.tiller-aad-pod-identity", "kubernetes_role_binding.tiller-aad-pod-identity"]
   name = "aad-pod-identity"
   repository = "artifactory"
   chart = "aad-pod-identity"
