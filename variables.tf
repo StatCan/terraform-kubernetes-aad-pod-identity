@@ -12,3 +12,8 @@ variable "client_id" {}
 variable "dependencies" {
   type = "list"
 }
+
+variable "values" {
+  default = ""
+  type = "string"
+}

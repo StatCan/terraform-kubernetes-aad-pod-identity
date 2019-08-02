@@ -71,7 +71,7 @@ resource "helm_release" "aad-pod-identity" {
   timeout = 1200
 
   values = [
-    "${file("${path.module}/values/aad-pod-identity.yaml")}",
+    "${var.values}",
   ]
 
   # Credentials
