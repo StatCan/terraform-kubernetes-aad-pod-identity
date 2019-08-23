@@ -63,7 +63,7 @@ resource "kubernetes_role_binding" "tiller-aad-pod-identity" {
 
 resource "helm_release" "aad-pod-identity" {
   depends_on = ["null_resource.wait-dependencies", "null_resource.dependency_getter", "kubernetes_role.tiller-aad-pod-identity", "kubernetes_role_binding.tiller-aad-pod-identity"]
-  name = "aad-pod-identity"
+  name = "mic-aad-pod-identity"
   repository = "${var.helm_repository}"
   chart = "aad-pod-identity"
   version = "${var.chart_version}"
