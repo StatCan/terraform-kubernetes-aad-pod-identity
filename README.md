@@ -43,12 +43,12 @@ EOF
 | Name                 | Type   | Required | Value                                               |
 | -------------------- | ------ | -------- | --------------------------------------------------- |
 | chart_version        | string | yes      | Version of the Helm Chart                           |
-| dependencies         | list   | yes      | Dependency name refering to namespace module        |
-| helm_service_account | list   | yes      | The service account for Helm to use                 |
-| helm_namespace       | list   | yes      | The namespace Helm will install the chart under     |
-| helm_repository      | list   | yes      | The repository where the Helm chart is stored       |
-| resource_id          | list   | yes      | The resource id to be used for the Managed Identity |
-| client_id            | list   | yes      | The client id to be used for the Managed Identity   |
+| dependencies         | string | yes      | Dependency name refering to namespace module        |
+| helm_service_account | string | yes      | The service account for Helm to use                 |
+| helm_namespace       | string | yes      | The namespace Helm will install the chart under     |
+| helm_repository      | string | yes      | The repository where the Helm chart is stored       |
+| resource_id          | string | yes      | The resource id to be used for the Managed Identity |
+| client_id            | string | yes      | The client id to be used for the Managed Identity   |
 | values               | list   | no       | Values to be passed to the Helm Chart               |
 
 ## History
