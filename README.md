@@ -22,7 +22,7 @@ The following security controls can be met through configuration of this templat
 
 ```terraform
 module "helm_aad_pod_identity" {
-  source = "gitlab.k8s.cloud.statcan.ca/cloudnative/terraform/modules/terraform-kubernetes-aad-pod-identity?ref=v2.0.0"
+  source = "gitlab.k8s.cloud.statcan.ca/cloudnative/terraform/modules/terraform-kubernetes-aad-pod-identity?ref=v2.0.1"
 
   chart_version = "1.6.0"
   dependencies  = [
