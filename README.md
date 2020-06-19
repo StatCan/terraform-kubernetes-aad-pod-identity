@@ -24,12 +24,12 @@ The following security controls can be met through configuration of this templat
 module "helm_aad_pod_identity" {
   source = "gitlab.k8s.cloud.statcan.ca/cloudnative/terraform/modules/terraform-kubernetes-aad-pod-identity?ref=v2.0.0"
 
-  chart_version = "0.0.1"
-  dependencies = [
+  chart_version = "1.6.0"
+  dependencies  = [
     "${module.namespace_default.depended_on}",
   ]
 
-  helm_namespace = "default"
+  helm_namespace  = "default"
   helm_repository = "stable"
 
   resource_id = "/subscriptions/<subscription_id>/resourceGroups/<resource_group>/providers/Microsoft.ManagedIdentity/userAssignedIdentities/<named_identity>"
