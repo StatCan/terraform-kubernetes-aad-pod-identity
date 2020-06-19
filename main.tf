@@ -17,58 +17,8 @@ resource "null_resource" "dependency_getter" {
   }
 }
 
-resource "null_resource" "wait-dependencies" {
-  provisioner "local-exec" {
-    command = "helm ls --tiller-namespace ${var.helm_namespace}"
-  }
-
-  depends_on = [
-    "null_resource.dependency_getter",
-  ]
-}
-
-# Namespace admin role
-resource "kubernetes_role" "tiller-aad-pod-identity" {
-  metadata {
-    name      = "tiller-aad-pod-identity"
-    namespace = "${var.helm_namespace}"
-  }
-
-  # Read/write access to aad-pod-identity resources
-  rule {
-    api_groups = ["aadpodidentity.k8s.io"]
-    resources  = ["*"]
-    verbs      = ["get", "list", "watch", "create", "update", "patch", "delete", "edit", "exec"]
-  }
-
-  depends_on = [
-    "null_resource.dependency_getter",
-  ]
-}
-
-# Namespace admin role bindings
-resource "kubernetes_role_binding" "tiller-aad-pod-identity" {
-  metadata {
-    name      = "tiller-aad-pod-identity"
-    namespace = "${var.helm_namespace}"
-  }
-
-  role_ref {
-    api_group = "rbac.authorization.k8s.io"
-    kind      = "Role"
-    name      = "tiller-aad-pod-identity"
-  }
-
-  # Users
-  subject {
-    kind      = "ServiceAccount"
-    name      = "${var.helm_service_account}"
-    namespace = "${var.helm_namespace}"
-  }
-}
-
 resource "helm_release" "aad-pod-identity" {
-  depends_on = ["null_resource.wait-dependencies", "null_resource.dependency_getter", "kubernetes_role.tiller-aad-pod-identity", "kubernetes_role_binding.tiller-aad-pod-identity"]
+  depends_on = ["null_resource.wait-dependencies", "null_resource.dependency_getter"]
   name       = "mic-aad-pod-identity"
   repository = "${var.helm_repository}"
   chart      = "aad-pod-identity"
