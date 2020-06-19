@@ -59,4 +59,5 @@ EOF
 | -------- | ---------- | ---------------------------------------------------------- |
 | 20190729 | 20190729.1 | Improvements to documentation and formatting               |
 | 20190909 | 20190909.1 | 1st release                                                |
-| 20200605 | v2.0.0     | Module now modified for Helm 3                             |
+| 20200619 | v2.0.0     | Module now modified for Helm 3                             |
+| 20200619 | v2.0.1     | Removed unneeded reference to kubernetes provider          |
