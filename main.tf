@@ -18,7 +18,7 @@ resource "null_resource" "dependency_getter" {
 }
 
 resource "helm_release" "aad-pod-identity" {
-  depends_on = ["null_resource.wait-dependencies", "null_resource.dependency_getter"]
+  depends_on = ["null_resource.dependency_getter"]
   name       = "mic-aad-pod-identity"
   repository = "${var.helm_repository}"
   chart      = "aad-pod-identity"
