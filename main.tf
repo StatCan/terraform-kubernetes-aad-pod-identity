@@ -31,19 +31,19 @@ resource "helm_release" "aad-pod-identity" {
   timeout   = 1200
 
   values = [
-    "${var.values}",
+    var.values,
   ]
 
   # Credentials
 
   set {
     name  = "azureIdentity.resourceID"
-    value = "${var.resource_id}"
+    value = var.resource_id
   }
 
   set {
     name  = "azureIdentity.clientID"
-    value = "${var.client_id}"
+    value = var.client_id
   }
 
 }

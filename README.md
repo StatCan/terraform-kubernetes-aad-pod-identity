@@ -26,7 +26,7 @@ module "helm_aad_pod_identity" {
 
   chart_version = "1.6.0"
   dependencies  = [
-    "${module.namespace_default.depended_on}",
+    module.namespace_default.depended_on,
   ]
 
   helm_namespace  = "default"
@@ -65,3 +65,4 @@ EOF
 | 20200619 | v2.0.1     | Removed unneeded reference to kubernetes provider   |
 | 20200621 | v2.0.2     | Removed unneeded dependency from helm_release       |
 | 20201013 | v2.0.3     | Add the ability to specify a username and password. |
+| 20210114 | v2.0.4     | Removed interpolation syntax                        |
