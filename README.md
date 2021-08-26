@@ -22,14 +22,14 @@ The following security controls can be met through configuration of this templat
 
 ```terraform
 module "helm_aad_pod_identity" {
-  source = "gitlab.k8s.cloud.statcan.ca/cloudnative/terraform/modules/terraform-kubernetes-aad-pod-identity?ref=v2.0.2"
+  source = "https://github.com/canada-ca-terraform-modules/terraform-kubernetes-aad-pod-identity?ref=v3.0.0"
 
   chart_version = "1.6.0"
-  dependencies  = [
-    module.namespace_default.depended_on,
+  depends_on  = [
+    module.namespace_default,
   ]
 
-  helm_namespace  = "default"
+  helm_namespace  = module.namespace_default.name
   helm_repository = "stable"
 
   resource_id = "/subscriptions/<subscription_id>/resourceGroups/<resource_group>/providers/Microsoft.ManagedIdentity/userAssignedIdentities/<named_identity>"
@@ -46,7 +46,6 @@ EOF
 | Name                     | Type   | Required | Value                                                         |
 | ------------------------ | ------ | -------- | ------------------------------------------------------------- |
 | chart_version            | string | yes      | Version of the Helm Chart                                     |
-| dependencies             | string | yes      | Dependency name refering to namespace module                  |
 | helm_namespace           | string | yes      | The namespace Helm will install the chart under               |
 | helm_repository          | string | yes      | The repository where the Helm chart is stored                 |
 | helm_repository_username | string | no       | The username of the repository where the Helm chart is stored |
@@ -66,3 +65,4 @@ EOF
 | 20200621 | v2.0.2     | Removed unneeded dependency from helm_release       |
 | 20201013 | v2.0.3     | Add the ability to specify a username and password. |
 | 20210114 | v2.0.4     | Removed interpolation syntax                        |
+| 20210824 | v3.0.0     | Update module for Terraform v0.13.                  |

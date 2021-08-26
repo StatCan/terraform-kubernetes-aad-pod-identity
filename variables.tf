@@ -16,11 +16,7 @@ variable "resource_id" {}
 
 variable "client_id" {}
 
-variable "dependencies" {
-  type = "list"
-}
-
 variable "values" {
   default = ""
-  type    = "string"
+  type    = string
 }
